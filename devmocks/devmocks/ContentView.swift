@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 func getGreeting() -> String {
     let currentHour = Calendar.current.component(.hour, from: Date())
     
@@ -22,181 +21,289 @@ func getGreeting() -> String {
     }
 }
 
-
 let greeting = getGreeting()
 
+//refresh func
+func refreshData() async {
+    // do work to asyncronously refresh your data here
+    try? await Task.sleep(nanoseconds: 1_000_000_000)
+}
 
 struct ContentView: View {
+    @State private var showPrompt = false
     var body: some View {
-        
-        VStack { //main container
-            
-            Spacer()
-
-            VStack (alignment: .leading) {
-                Text("Good " + greeting)
-                    .font(.system(size: 30))
-                    .fontWeight(.light)
+        VStack { //main vertical stack
+            ScrollView (showsIndicators: false) {
                 
-                Text(Date.now.formatted(date: .long, time: .omitted))
-                    .font(.system(size: 30))
-                    .fontWeight(.bold)
+                ZStack {
+                    if showPrompt {
+                       Create()
+                            .transition(.move(edge: .bottom))
+                    }
+                }
+                
+                Spacer()
+                // below here is the header section
+                Spacer()
+                Spacer()
 
-            } //header vstack
-            .offset(x: -50)
-            
-            Spacer()
-                        
-            Section{ // section DP
-                NavigationLink(destination: DailyPrompt()) {
+                VStack (alignment: .leading) { //header
+                    Text("Good " + greeting)
+                        .font(.system(size: 24))
+                        .fontWeight(.light)
+                        .foregroundColor(Color("DarkTextPrimary"))
                     
-                    ZStack {
-                        
-                        VStack (alignment: .leading){ //daily prompt stack
-                            
-                            VStack (alignment: .leading) {
-                                
-                                Text("DAILY PROMPT")
-                                    .font(.subheadline)
+                    Text(Date.now.formatted(date: .long, time: .omitted))
+                        .font(.system(size: 28))
+                        .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(Color("DarkTextPrimary"))
+                } //header
+                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
+                .padding(.trailing, 60)
+                // above here is the header section
+                
+                Spacer()
+                Spacer()
+                Spacer()
+                
+                // below here is mid content block 1
+                Section{ //container bg
+                        VStack { //container bg
+                            VStack (alignment: .leading){ //DP header stack
+                                Text("daily create")
+                                    .font(.system(size: 15))
+                                    .textCase(.uppercase)
                                     .kerning(2)
-                                    .fontWeight(.medium)
+                                    .foregroundColor(Color("DarkTextPrimary"))
                                 
-                                Text("A Study in Color")
-                                    .font(.title)
-                                    .fontWeight(.medium)
-                                
-                                
-                                Text("A rods and cones galore.")
-                                    .font(.subheadline)
-                                    .fontWeight(.regular)
-                                    .opacity(0.5)
+                                Text("Today's Prompt")
+                                    .font(.system(size: 30))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color("DarkTextPrimary"))
+                            } //DP header stack
+                            .padding(.trailing, 80)
+                            .padding(.top, 20)
+                            ZStack {
+                                Image("Doodle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .rotationEffect(.degrees(10))
+                                    .frame(width: 300)
                             }
-                            .offset(x: -65, y:-140)
+                            .padding(.horizontal, -20)
                             
-                        } //daily prompt stack
-                        .background(
-                            RoundedRectangle(cornerRadius: 40)
-                                .stroke(Color("StrokePrimary"), lineWidth: 2)
-                                .fill(Color("BackgroundPrimary"))
-                                .frame(width: 390, height: 400)
-                        )
-                        
-                        
-                        
-                        ZStack {
-                            
-                            Image("Doodle")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 380)
-                                .rotationEffect(.degrees(10))
-                            
-                        }
-                        .background(
-                            RoundedRectangle(cornerRadius: 40)
-                                .fill(Color("AccentPrimary"))
-                                .frame(width: 350, height: 260)
-                        )
-                        .padding(.top, 100)
-                        
-                        
-                    }
-                }
-            } //section - DP
-            .accentColor(Color("DarkTextPrimary")) // Change the accent color here
-
-
-            
-            VStack (alignment: .leading) {
-                
-                Text("Get Creative")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                
-                Divider()
-                
-                HStack { //past prompts hori
-                    
-                    VStack (alignment: .leading) {
-                        
-                        Text("Past prompts")
-                            .font(.title3)
-                            .fontWeight(.medium)
-                        
-                        Text(
-                            "View prompts from previous days"
-                        )
-                        .font(.subheadline)
-                        .fontWeight(.regular)
-                    }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "arrow.forward.circle.fill")
-                        .foregroundColor(Color("AccentPrimary"))
-                        .imageScale(.large)
-                    
-                } //past prompts
-                
-                Divider()
-                
-                Section{
-                    NavigationLink(destination: DailyPrompt()) {
-                        HStack { //Create your own
-                            VStack (alignment: .leading) {
-                                Text("Create your own")
-                                    .font(.title3)
-                                    .fontWeight(.medium)
-                                Text("Powered by ChatGPT")
-                                    .font(.subheadline)
-                                    .fontWeight(.regular)
-                            }
                             Spacer()
-                            Image(systemName: "arrow.forward.circle.fill")
-                                .foregroundColor(Color("AccentPrimary"))
-                                .imageScale(.large)
-                        }
-                    } // NavigationLink
-                    .accentColor(Color("DarkTextPrimary")) // Change the accent color here
-                }
-
-                
-                Divider()
-                
-                HStack { //Blog
-                    
-                    VStack (alignment: .leading) {
-                        
-                        Text("Read our blog")
-                            .font(.title3)
-                            .fontWeight(.medium)
-                        
-                        Text(
-                            "Read and submit to our blog"
+                            
+                            
+                        } //container bg
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 40)
+                                .fill(Color("BackgroundPrimary"))
+                                .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                                .padding(.horizontal, 20)
                         )
-                        .font(.subheadline)
-                        .fontWeight(.regular)
+
+                    
+                    
+                } // section container bg
+                .onTapGesture {
+                    withAnimation {
+                        showPrompt.toggle()
                     }
-                    
-                    Spacer()
-                    
-                    Image(systemName: "arrow.forward.circle.fill")
-                        .foregroundColor(Color("AccentPrimary"))
-                        .imageScale(.large)
-                    
-                } //Blog
+                }
                 
+                
+                
+                // above here is mid content block 1
+
+                Spacer()
+                Spacer()
             
+                // below here is mid content block 2
+                Section{ //container bg
+                    NavigationLink(destination: DailyPrompt()) {
+                        VStack { //container bg
+                            VStack (alignment: .trailing){ //DP header stack
+                                Text("create your own")
+                                    .font(.system(size: 15))
+                                    .textCase(.uppercase)
+                                    .kerning(2)
+                                    .foregroundColor(Color("DarkTextPrimary"))
+                                
+                                Text("AI Generation")
+                                    .font(.system(size: 30))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color("DarkTextPrimary"))
+                            } //DP header stack
+                            .padding(.trailing, -80)
+                            .padding(.top, 20)
+                            ZStack {
+                                Image("Doodle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .rotationEffect(.degrees(10))
+                                    .frame(width: 300)
+                                    .scaleEffect(x: -1, y: 1)  // flip horizontally
+                            }
+                            .padding(.horizontal, -20)
+                            
+                            Spacer()
+                            
+                        } //container bg
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 40)
+                                .fill(Color("AltBackgroundPrimaryThird"))
+                                .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                                .padding(.horizontal, 20)
+                        )
+                    }
+                } // section container bg
+                // above here is mid content block 2
+         
+                Spacer()
+                Spacer()
+
+                // below here is mid content block 3
+                Section{//container bg
+                    NavigationLink(destination: DailyPrompt()) {
+                        VStack { //container bg
+                            VStack (alignment: .leading){ //DP header stack
+                                Text("find inspiration")
+                                    .font(.system(size: 15))
+                                    .textCase(.uppercase)
+                                    .kerning(2)
+                                    .foregroundColor(Color("DarkTextPrimary"))
+                                
+                                Text("Read our Blog")
+                                    .font(.system(size: 30))
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(Color("DarkTextPrimary"))
+                            } //DP header stack
+                            .padding(.trailing, 110)
+                            .padding(.top, 20)
+                            ZStack {
+                                Image("Doodle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .rotationEffect(.degrees(10))
+                                    .frame(width: 300)
+                            }
+                            .padding(.horizontal, -20)
+                            Spacer()
+                        } //container bg
+                        .frame(maxWidth: .infinity)
+                        .background(
+                            RoundedRectangle(cornerRadius: 40)
+                                .fill(Color("AltBackgroundPrimary"))
+                                .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                                .padding(.horizontal, 20)
+                        )
+                    }
+                } // section container bg
+                // above here is mid content block 3
+                
+                Spacer()
+                Spacer()
+                
+                // below here is bottom content block
+                VStack (alignment: .leading) { //bottom section
+                    Text("More from us")
+                        .font(.title3)
+                        .fontWeight(.medium)
+                        .foregroundColor(Color("DarkTextPrimary"))
+                    Divider()
+                    HStack { //past prompts hori
+                        VStack (alignment: .leading) {
+                            Text("Join our Discord")
+                                .font(.title3)
+                                .fontWeight(.medium)
+                                .foregroundColor(Color("DarkTextPrimary"))
+
+                            Text("Join our Discord Server")
+                            .font(.subheadline)
+                            .fontWeight(.regular)
+                            .foregroundColor(Color("DarkTextPrimary"))
+                        }
+                        Spacer()
+                        Image(systemName: "arrow.forward.circle.fill")
+                            .foregroundColor(Color("AccentPrimary"))
+                            .imageScale(.large)
+                    } //past prompts
+                    Divider()
+                    Section{
+                        NavigationLink(destination: DailyPrompt()) {
+                            HStack { //Create your own
+                                VStack (alignment: .leading) {
+                                    Text("Follow us")
+                                        .font(.title3)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(Color("DarkTextPrimary"))
+                                    
+                                    Text("Our social media")
+                                        .font(.subheadline)
+                                        .fontWeight(.regular)
+                                        .foregroundColor(Color("DarkTextPrimary"))
+                                }
+                                Spacer()
+                                Image(systemName: "arrow.forward.circle.fill")
+                                    .foregroundColor(Color("AccentPrimary"))
+                                    .imageScale(.large)
+                            }
+                        } // NavigationLink
+                        .accentColor(Color("DarkTextPrimary")) // Change the accent color here
+                    }
+                    Divider()
+                    HStack { //Blog
+                        VStack (alignment: .leading) {
+                            Text("About")
+                                .font(.title3)
+                                .fontWeight(.medium)
+                                .foregroundColor(Color("DarkTextPrimary"))
+                            
+                            Text(
+                                "Who we are"
+                            )
+                            .font(.subheadline)
+                            .fontWeight(.regular)
+                            .foregroundColor(Color("DarkTextPrimary"))
+                        }
+                        Spacer()
+                        Image(systemName: "arrow.forward.circle.fill")
+                            .foregroundColor(Color("AccentPrimary"))
+                            .imageScale(.large)
+                    } //Blog
+                } //end bottom section
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 40)
+                .padding(.vertical, 30)
+                .background(
+                    RoundedRectangle(cornerRadius: 40)
+                        .fill(Color("LighterBackgroundPrimary"))
+                        .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                        .padding(.horizontal, 20)
+                )
+                
+                Spacer()
+                Spacer()
+                
+            }//scrollview
+            .refreshable {
+                await refreshData()
             }
-            .padding(.horizontal, 30)
-            .padding(.bottom, 50)
+            
             
 
-            Spacer()
+            
+        } //main stack
+        .frame(maxHeight: .infinity)
+        .background(
+            Rectangle()
+                .fill(Color("LightTextPrimary"))
+                .ignoresSafeArea()
+        )
 
-
-        } //main container
-        
     }
 }
 

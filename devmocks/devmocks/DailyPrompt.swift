@@ -9,14 +9,7 @@ import SwiftUI
 
 struct DailyPrompt: View {
     var body: some View {
-        
-        VStack { //main
-            
-
-        } //main stack
-        
-        
-        
+        Text("wah")
     }
 }
 
