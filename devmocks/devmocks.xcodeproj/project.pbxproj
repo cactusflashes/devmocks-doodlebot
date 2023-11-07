@@ -16,6 +16,7 @@
 		958CB05A2AF5E85B00BFEEA8 /* devmocksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958CB0592AF5E85B00BFEEA8 /* devmocksUITests.swift */; };
 		958CB05C2AF5E85B00BFEEA8 /* devmocksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958CB05B2AF5E85B00BFEEA8 /* devmocksUITestsLaunchTests.swift */; };
 		958CB0692AF603CE00BFEEA8 /* DailyPrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958CB0682AF603CE00BFEEA8 /* DailyPrompt.swift */; };
+		95F346332AF9DA7F00815656 /* FlashcardTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95F346322AF9DA7F00815656 /* FlashcardTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		958CB0592AF5E85B00BFEEA8 /* devmocksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = devmocksUITests.swift; sourceTree = "<group>"; };
 		958CB05B2AF5E85B00BFEEA8 /* devmocksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = devmocksUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		958CB0682AF603CE00BFEEA8 /* DailyPrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPrompt.swift; sourceTree = "<group>"; };
+		95F346322AF9DA7F00815656 /* FlashcardTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashcardTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				958CB03E2AF5E85800BFEEA8 /* devmocksApp.swift */,
 				958CB0402AF5E85800BFEEA8 /* ContentView.swift */,
 				958CB0682AF603CE00BFEEA8 /* DailyPrompt.swift */,
+				95F346322AF9DA7F00815656 /* FlashcardTest.swift */,
 				9564A43E2AF87AE200C03CDC /* Create.swift */,
 				958CB0422AF5E85A00BFEEA8 /* Assets.xcassets */,
 				958CB0442AF5E85A00BFEEA8 /* Preview Content */,
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95F346332AF9DA7F00815656 /* FlashcardTest.swift in Sources */,
 				958CB0412AF5E85800BFEEA8 /* ContentView.swift in Sources */,
 				958CB03F2AF5E85800BFEEA8 /* devmocksApp.swift in Sources */,
 				958CB0692AF603CE00BFEEA8 /* DailyPrompt.swift in Sources */,
