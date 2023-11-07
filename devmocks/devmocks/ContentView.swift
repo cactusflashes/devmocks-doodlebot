@@ -30,18 +30,12 @@ func refreshData() async {
 }
 
 struct ContentView: View {
-    @State private var showPrompt = false
+    @State private var showPrompt: Bool = false
+    @Environment(\.presentationMode) var presentationMode
     var body: some View {
         VStack { //main vertical stack
             ScrollView (showsIndicators: false) {
-                
-                ZStack {
-                    if showPrompt {
-                       Create()
-                            .transition(.move(edge: .bottom))
-                    }
-                }
-                
+            
                 Spacer()
                 // below here is the header section
                 Spacer()
@@ -108,10 +102,11 @@ struct ContentView: View {
                     
                 } // section container bg
                 .onTapGesture {
-                    withAnimation {
-                        showPrompt.toggle()
-                    }
+                    showPrompt.toggle()
                 }
+                .fullScreenCover(isPresented: $showPrompt, content: {
+                    DailyPrompt()
+                })
                 
                 
                 
@@ -122,31 +117,36 @@ struct ContentView: View {
             
                 // below here is mid content block 2
                 Section{ //container bg
-                    NavigationLink(destination: DailyPrompt()) {
                         VStack { //container bg
-                            VStack (alignment: .trailing){ //DP header stack
-                                Text("create your own")
-                                    .font(.system(size: 15))
-                                    .textCase(.uppercase)
-                                    .kerning(2)
-                                    .foregroundColor(Color("DarkTextPrimary"))
+                            HStack {
+                                Spacer()
+                                ZStack {
+                                    Image("Doodle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .rotationEffect(.degrees(10))
+                                        .frame(width: 100)
+                                        .scaleEffect(x: -1, y: 1)  // flip!
+                                }
                                 
-                                Text("AI Generation")
-                                    .font(.system(size: 30))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(Color("DarkTextPrimary"))
-                            } //DP header stack
-                            .padding(.trailing, -80)
-                            .padding(.top, 20)
-                            ZStack {
-                                Image("Doodle")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .rotationEffect(.degrees(10))
-                                    .frame(width: 300)
-                                    .scaleEffect(x: -1, y: 1)  // flip horizontally
+                                
+                                
+                                VStack (alignment: .trailing){ //DP header stack
+                                    Text("create your own")
+                                        .font(.system(size: 12))
+                                        .textCase(.uppercase)
+                                        .kerning(2)
+                                        .foregroundColor(Color("DarkTextPrimary"))
+                                    
+                                    Text("AI Generation")
+                                        .font(.system(size: 25))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(Color("DarkTextPrimary"))
+                                } //DP header stack
+                                Spacer()
+
                             }
-                            .padding(.horizontal, -20)
+                            .frame(height: 150)
                             
                             Spacer()
                             
@@ -158,7 +158,6 @@ struct ContentView: View {
                                 .stroke(Color("StrokePrimary"), lineWidth: 0.5)
                                 .padding(.horizontal, 20)
                         )
-                    }
                 } // section container bg
                 // above here is mid content block 2
          
@@ -166,32 +165,37 @@ struct ContentView: View {
                 Spacer()
 
                 // below here is mid content block 3
-                Section{//container bg
-                    NavigationLink(destination: DailyPrompt()) {
+                Section{ //container bg
                         VStack { //container bg
-                            VStack (alignment: .leading){ //DP header stack
-                                Text("find inspiration")
-                                    .font(.system(size: 15))
-                                    .textCase(.uppercase)
-                                    .kerning(2)
-                                    .foregroundColor(Color("DarkTextPrimary"))
+                            HStack {
+                                Spacer()
+                                VStack (alignment: .leading){ //DP header stack
+                                    Text("Get Inspired")
+                                        .font(.system(size: 12))
+                                        .textCase(.uppercase)
+                                        .kerning(2)
+                                        .foregroundColor(Color("DarkTextPrimary"))
+                                    
+                                    Text("Read our Blog")
+                                        .font(.system(size: 25))
+                                        .fontWeight(.semibold)
+                                        .foregroundColor(Color("DarkTextPrimary"))
+                                } //DP header stack
                                 
-                                Text("Read our Blog")
-                                    .font(.system(size: 30))
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(Color("DarkTextPrimary"))
-                            } //DP header stack
-                            .padding(.trailing, 110)
-                            .padding(.top, 20)
-                            ZStack {
-                                Image("Doodle")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .rotationEffect(.degrees(10))
-                                    .frame(width: 300)
+                                ZStack {
+                                    Image("Doodle")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .rotationEffect(.degrees(10))
+                                        .frame(width: 100)
+                                }
+                                
+                                Spacer()
+
                             }
-                            .padding(.horizontal, -20)
-                            Spacer()
+                            .frame(height: 150)
+                            
+                            
                         } //container bg
                         .frame(maxWidth: .infinity)
                         .background(
@@ -200,7 +204,6 @@ struct ContentView: View {
                                 .stroke(Color("StrokePrimary"), lineWidth: 0.5)
                                 .padding(.horizontal, 20)
                         )
-                    }
                 } // section container bg
                 // above here is mid content block 3
                 
