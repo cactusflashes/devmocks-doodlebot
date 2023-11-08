@@ -10,7 +10,7 @@ import SwiftUI
 var promptTitle: String = "A Study in Color"
 
 struct DailyPrompt: View {
-    @State private var isBlurred = true
+    @State private var isBlurred: Bool = true
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
@@ -63,10 +63,27 @@ struct DailyPrompt: View {
                             .frame(width: 300)
                             .fontWeight(.heavy)
                             .foregroundColor(isBlurred ? (Color("AltBackgroundPrimary")) : (Color("DarkAccentPrimary")))
+                        
+                        
+                        HStack {
+                            Image(systemName: "square.on.square")
+                            Image(systemName: "message")
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                        .offset(x: 110, y: 150)
+                        .opacity(isBlurred ? 0 : 0.5)
+                        .animation(
+                            Animation.spring(duration: 0.8)
+                                .delay(isBlurred ? 0 : 0.5),
+                            value: isBlurred
+                        )
+
                     }
+                    
                     .blur(radius: isBlurred ? 10 : 0)
                     
                 }
+                
                 
                 
                 
