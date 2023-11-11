@@ -25,23 +25,23 @@ struct DailyPrompt: View {
                         .foregroundColor(Color("LightTextPrimary"))
                         .font(.system(size: 15))
                         .padding(20)
-                        .background(Ellipse().fill(Color("DarkTextPrimary")).frame(width: 40, height: 40))
+                        .background(Ellipse().fill(Color("MediumAccentSecondary")).frame(width: 40, height: 40))
                 })
             } //top button holder
             .padding(.leading, 280)
             
-            Spacer()
             
             Text(Date.now.formatted(date: .long, time: .omitted))
                 .font(.title3)
+                .foregroundColor(Color("DarkTextPrimary"))
             
             Text(promptTitle)
                 .font(.largeTitle)
                 .fontWeight(.bold)
+                .foregroundColor(Color("DarkTextPrimary"))
             
             Spacer()
-            
-            
+            Spacer()
             Spacer()
             
             Section { //card section
@@ -51,7 +51,7 @@ struct DailyPrompt: View {
                     Text("Tap to reveal")
                         .font(.title)
                         .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                        .foregroundColor(Color("DarkTextPrimary"))
+                        .foregroundColor(Color("LightTextAlways"))
                         .offset(y: 90)
                         .opacity(isBlurred ? 1 : 0)
                         .animation(.spring(duration: 0.4), value: isBlurred) // Adjust the duration here
@@ -62,7 +62,7 @@ struct DailyPrompt: View {
                             .font(.system(size: 30))
                             .frame(width: 300)
                             .fontWeight(.heavy)
-                            .foregroundColor(isBlurred ? (Color("AltBackgroundPrimary")) : (Color("DarkAccentPrimary")))
+                            .foregroundColor(isBlurred ? (Color("MediumAccentPrimary")) : (Color("DarkTextPrimary")))
                         
                         
                         HStack {
@@ -70,7 +70,7 @@ struct DailyPrompt: View {
                             Image(systemName: "message")
                             Image(systemName: "square.and.arrow.up")
                         }
-                        .offset(x: 110, y: 150)
+                        .offset(x: 110, y: 220)
                         .opacity(isBlurred ? 0 : 0.5)
                         .animation(
                             Animation.spring(duration: 0.8)
@@ -89,12 +89,13 @@ struct DailyPrompt: View {
                 
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
-            .frame(height: 400)
+            .frame(height: 550)
             .background(
                 RoundedRectangle(cornerRadius: isBlurred ? 100 : 40)
-                    .stroke(Color("StrokePrimary"), lineWidth: 1)
-                    .fill(isBlurred ? (Color("AltBackgroundPrimary")) : (Color("LighterBackgroundPrimary")) )
-                    .blur(radius: isBlurred ? 5 : 0)
+                    .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                    .fill(isBlurred ? (Color("MediumAccentPrimary")) : (Color("StrokePrimary")) )
+                    .blur(radius: isBlurred ? 10 : 0)
+                    .shadow(color: Color("AccentPrimary"), radius: isBlurred ? 0 : 10)
             )
             .padding(.horizontal, 20)
             .onTapGesture {
@@ -107,6 +108,8 @@ struct DailyPrompt: View {
 
                 
             Spacer()
+            Spacer()
+
 
         }
         .frame(maxHeight: .infinity)
