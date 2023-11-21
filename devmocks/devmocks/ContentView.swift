@@ -73,6 +73,7 @@ struct ContentView: View {
                         .fill(Color("LighterBackgroundPrimary"))
                         .stroke(Color("StrokePrimary"), lineWidth: 0.5)
                         .frame(height: 100)
+
                 )
                 .padding(.horizontal, 10)
                 //.padding(.trailing, 60)

@@ -45,7 +45,14 @@ struct BlogsContentView: View {
                             .foregroundColor(Color("LightTextPrimary"))
                             .font(.system(size: 15))
                             .padding(20)
-                            .background(Ellipse().fill(Color("MediumAccentSecondary")).frame(width: 40, height: 40))
+                            .background(
+                                Ellipse()
+                                    .fill(Color("MediumAccentSecondary"))
+                                    .frame(width: 40, height: 40)
+                                    .shadow(color: Color("AccentPrimary"), radius: 3)
+
+                            )
+                        
                     })
                 } //top button holder
                 Spacer()
@@ -92,8 +99,11 @@ struct BlogsContentView: View {
             .background(
                 RoundedRectangle(cornerRadius: 40)
                     .fill(Color("LightTextPrimary"))
-                    .stroke(Color("StrokePrimary"), lineWidth: 1)
+                    .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                    .shadow(color: Color("AccentPrimary"), radius: 4)
+
             )
+
             
             HStack {
                 Image(systemName: "arrow.left.arrow.right.square.fill")
@@ -165,10 +175,10 @@ struct BlogsContentView: View {
                 .background(
                 RoundedRectangle(cornerRadius: 40)
                     .fill(Color("LightTextPrimary"))
-                    .stroke(Color("StrokePrimary"), lineWidth: 1.5)
 
                 )
                 .cornerRadius(40)
+                .shadow(color: Color("AccentPrimary"), radius: 5)
 
 
                     
@@ -212,16 +222,20 @@ struct BlogsContentView: View {
                             
                         }//scrollview
                         .cornerRadius(40)
+                        
 
                     } //vertlist
                         .frame(height: 300)
                         .background(
                             RoundedRectangle(cornerRadius: 40)
                                 .fill(Color("LightTextPrimary"))
-                                .stroke(Color("StrokePrimary"), lineWidth: 1)
+                                .stroke(Color("StrokePrimary"), lineWidth: 0.5)
+                                .shadow(color: Color("AccentPrimary"), radius: 4)
+
 
                         )
                         .padding(.horizontal, 20)
+
 
                     
             } //main container
